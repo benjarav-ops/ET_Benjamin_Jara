@@ -1,7 +1,5 @@
 
 #0. Funciones de validacion y busqueda
-
-
 def validar_precio(precio):
     try:
         precio_corregido = int(precio)
@@ -24,7 +22,7 @@ def validar_texto(texto):
 
 def validar_clasificacion(clasificacion):
     clasificacion_corregida = clasificacion.strip().upper()
-    if clasificacion_corregida == ("E" , "T" , "M"):
+    if clasificacion_corregida == "E" or clasificacion_corregida == "T" or clasificacion_corregida == "M":
         return True
     else:
         print ("Clasificiacion invalida")
@@ -153,9 +151,9 @@ def actualizar_precio(codigo , nuevo_precio):
 
 
 
-def agregar_Juego(codigo , titulo , plataforma , genero , clasificacion , multiplayer , editor , precio , stock ):
+def agregar_Juego(codigo , titulo , plataforma , genero , clasificacion , multi , editor , precio , stock ):
 
-    juegos[codigo: titulo , plataforma , genero , clasificacion , multiplayer , editor ]
+    juegos[codigo: titulo , plataforma , genero , clasificacion , multi , editor ]
 
     inventario[codigo: , int(precio) , int(stock)]
 
@@ -163,7 +161,8 @@ def agregar_Juego(codigo , titulo , plataforma , genero , clasificacion , multip
 
     return juegos , inventario
 
-
+def eliminar_juego(codigo):
+    pass
 
 
 
@@ -228,7 +227,7 @@ while opcion !=6:
         plataforma = input("Ingrese la plataforma del juego: ")
         genero = input("Ingrese el genero del juego: ")
         clasificacion = input("Ingrese la clasificacion del juego: ")
-        multiplayer = input("El juego tiene multiplayer?: ")
+        multiplayer = input("El juego tiene multiplayer?: ").lower()
         editor = input ("Ingrese el editor del juego: ")
 
         #Datos que van en inventario
@@ -237,16 +236,19 @@ while opcion !=6:
 
         if buscar_codigo(codigo) == False and validar_texto(multiplayer) and validar_clasificacion(clasificacion) and validar_texto(titulo) and validar_texto(plataforma) and validar_texto(genero) and validar_texto(editor) and validar_precio(precio) and validar_stock(stock):
             if multiplayer == "s" :
-                multiplayer = True
+                multi = True
             else:
-                multiplayer = False
+                multi = False
 
             print("Agregando")
             
-            agregar_Juego(codigo , titulo , plataforma , genero , clasificacion , multiplayer , editor , precio , stock )
+            agregar_Juego(codigo , titulo , plataforma , genero , clasificacion , multi , editor , precio , stock )
         
         else:
             print ("Dato invalido")
+        
+    elif opcion == 5:
+        pass
 
 
     
@@ -255,34 +257,3 @@ while opcion !=6:
         print("Saliendo del sistema . . . ")
         break
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #elif opcion == 7:
-        codigo_buscado = input("Ingrese un codigo: ").upper().strip()
-
-        if buscar_codigo(codigo_buscado):
-            print("Codigo existente")
-        else:
-            print("Codigo no existe")
